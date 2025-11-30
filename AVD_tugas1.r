@@ -9,12 +9,14 @@ print(paste("kecepatan rata-rata = ", kecepatan_rata))
 print(paste("jarak rata-rata = ", jarak_rata))
 print(paste("sd jarak = ", sd_jarak))
 
+result_folder <- "tugas1_results"
+
 #soal 2
-png("scatterplot.png", width = 600, height = 400)
+png(file.path(result_folder, "scatterplot.png"), width = 600, height = 400)
 plot(kecepatan, jarak, main = "scatter plot kecepatan vs jarak",xlab = "kecepatan (km/h)", ylab = "jarak (meter)",pch = 19, col = "black")
 dev.off()
 
-png("histogram_kecepatan.png", width = 600, height = 400)
+png(file.path(result_folder, "histogram_kecepatan.png"), width = 600, height = 400)
 hist(kecepatan, main = "histogram kecepatan mobil",xlab = "kecepatan (km/h)",col = "gray", border = "black")
 dev.off()
 
