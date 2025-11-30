@@ -1,0 +1,26 @@
+HASIL ANALISIS REGRESI LINEAR
+Variabel Bebas: Pendapatan
+Variabel Terikat: Kebahagiaan
+Jumlah Observasi: 499 
+========================================
+
+
+Call:
+lm(formula = kebahagiaan ~ pendapatan, data = data)
+
+Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.02292 -0.47796  0.03729  0.44564  2.38002 
+
+Coefficients:
+            Estimate Std. Error t value Pr(>|t|)    
+(Intercept)  0.20906    0.08962   2.333   0.0201 *  
+pendapatan   0.71239    0.01870  38.089   <2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 0.724 on 496 degrees of freedom
+  (1 observation deleted due to missingness)
+Multiple R-squared:  0.7452,	Adjusted R-squared:  0.7447 
+F-statistic:  1451 on 1 and 496 DF,  p-value: < 2.2e-16
+
