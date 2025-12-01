@@ -53,29 +53,40 @@ print(summary(data))
 cat("\n=== a. CEK DISTRIBUSI NORMAL ===\n")
 
 # Histogram untuk variabel terikat (kebahagiaan)
+mean_kebahagiaan <- mean(data$kebahagiaan, na.rm = TRUE)
 hist_kebahagiaan <- ggplot(data, aes(x = kebahagiaan)) +
-  geom_histogram(aes(y = ..density..), bins = 15, fill = "lightblue", alpha = 0.7, color = "black") +
-  geom_density(color = "darkblue", size = 1.2) +
-  geom_vline(aes(xintercept = mean(kebahagiaan)), color = "red", linetype = "dashed", size = 1) +
-  labs(title = "a. Histogram Distribusi Variabel Kebahagiaan",
-       subtitle = "Cek Distribusi Normal Variabel Terikat",
-       x = "Tingkat Kebahagiaan",
-       y = "Density") +
+  geom_histogram(aes(y = after_stat(density)), bins = 15, fill = "lightblue", alpha = 0.7, color = "black") +
+  geom_density(color = "darkblue", linewidth = 1.2) +
+  geom_vline(aes(xintercept = mean_kebahagiaan), color = "red", linetype = "dashed", linewidth = 1) +
+  labs(
+    title = "a. Histogram Distribusi Variabel Kebahagiaan",
+    subtitle = "Cek Distribusi Normal Variabel Terikat",
+    x = "Tingkat Kebahagiaan",
+    y = "Density"
+  ) +
   theme_minimal() +
-  annotate("text", x = mean(data$kebahagiaan), y = 0.2, 
-           label = paste("Mean =", round(mean(data$kebahagiaan), 2)), 
-           color = "red", vjust = -1)
+  annotate("text", 
+           x = mean_kebahagiaan, 
+           y = 0.2, 
+           label = paste("Mean =", round(mean_kebahagiaan, 2)), 
+           color = "red", 
+           vjust = -1)
 
+# Tampilkan plot
 print(hist_kebahagiaan)
-ggsave(file.path(result_folder, "tugas2_histogram_kebahagiaan.png"), hist_kebahagiaan, width = 8, height = 6)
+
+# Simpan
+ggsave(file.path(result_folder, "tugas2_histogram_kebahagiaan.png"), 
+       plot = hist_kebahagiaan, 
+       width = 8, 
+       height = 6)
 
 # Interpretasi
 cat("Interpretasi Histogram:\n")
 cat("- Histogram menunjukkan distribusi frekuensi variabel kebahagiaan\n")
 cat("- Garis merah (density) menunjukkan estimasi kurva distribusi\n")
 cat("- Jika bentuk menyerupai bell curve, data berdistribusi normal\n")
-cat("- Mean kebahagiaan:", round(mean(data$kebahagiaan), 2), "\n")
-
+cat("- Mean kebahagiaan:", mean_kebahagiaan, "\n")
 
 cat("\n=== b. SCATTER PLOT HUBUNGAN LINEAR ===\n")
 
@@ -191,7 +202,7 @@ regression_plot <- ggplot(data, aes(x = pendapatan, y = kebahagiaan)) +
        subtitle = "Visualisasi Lengkap dengan Garis Regresi dan Persamaan",
        x = "Pendapatan",
        y = "Tingkat Kebahagiaan",
-       caption = paste("n =", nrow(data), "observasi | Sumber: Data Tutorial")) +
+       caption = paste("n =", nrow(data), "observasi | sumber: data Tutorial")) +
   
   theme_minimal() +
   theme(
